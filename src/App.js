@@ -9,8 +9,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
 
-
-
+// Initial state of the app
 const initialState = {
         input: '',
       imageUrl: '',
@@ -26,12 +25,14 @@ const initialState = {
       }
 }
 
+// Main App component
 class App extends Component {
   constructor() {
     super();
     this.state = initialState;
   }
 
+  // Method to load user data
   loadUser = (data) => {
     this.setState({user: {
       id: data.id,
@@ -42,6 +43,7 @@ class App extends Component {
     }})
   }
 
+  // Method to calculate face location
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputimage');
@@ -55,14 +57,17 @@ class App extends Component {
     }
   }
 
+  // Method to display face box
   displayFaceBox = (box) => {
     this.setState({box: box});
   }
 
+  // Method to handle input change
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
 
+  // Method to handle button submit
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
    
@@ -71,6 +76,7 @@ class App extends Component {
     // for the Face Detect Mode: https://www.clarifai.com/models/face-detection
     // If that isn't working, then that means you will have to wait until their servers are back up. 
 
+    // Fetching data from the API
       fetch('https://aqueous-earth-88471-1d6fe5b30998.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -98,8 +104,9 @@ class App extends Component {
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
       .catch(err => console.log(err));
-  }
+  } 
 
+  // Method to handle route change
   onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState(initialState)
@@ -109,6 +116,7 @@ class App extends Component {
     this.setState({route: route});
   }
 
+  // Rendering the components
   render() {
     const { isSignedIn, imageUrl, route, box } = this.state;
     return (

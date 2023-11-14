@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Signin component
 class Signin extends React.Component {
   constructor(props) {
     super(props);
@@ -9,14 +10,17 @@ class Signin extends React.Component {
     }
   }
 
+  // Method to handle email change
   onEmailChange = (event) => {
     this.setState({signInEmail: event.target.value})
   }
 
+  // Method to handle password change
   onPasswordChange = (event) => {
     this.setState({signInPassword: event.target.value})
   }
 
+  // Method to handle form submission
   onSubmitSignIn = () => {
     fetch('https://aqueous-earth-88471-1d6fe5b30998.herokuapp.com/signin', {
       method: 'post',
@@ -35,6 +39,7 @@ class Signin extends React.Component {
       })
   }
 
+  // Rendering the form
   render() {
     const { onRouteChange } = this.props;
     return (

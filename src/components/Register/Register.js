@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Register component
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -10,18 +11,22 @@ class Register extends React.Component {
     }
   }
 
+  // Method to handle name change
   onNameChange = (event) => {
     this.setState({name: event.target.value})
   }
 
+  // Method to handle email change
   onEmailChange = (event) => {
     this.setState({email: event.target.value})
   }
 
+  // Method to handle password change
   onPasswordChange = (event) => {
     this.setState({password: event.target.value})
   }
 
+  // Method to handle form submission
   onSubmitSignIn = () => {
     fetch('https://aqueous-earth-88471-1d6fe5b30998.herokuapp.com/register', {
       method: 'post',
@@ -41,6 +46,7 @@ class Register extends React.Component {
       })
   }
 
+  // Rendering the form
   render() {
     return (
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
