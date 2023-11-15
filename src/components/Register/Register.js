@@ -3,7 +3,9 @@ import React from 'react';
 // Register component
 class Register extends React.Component {
   constructor(props) {
+    // Call the constructor of the parent class (React.Component)
     super(props);
+    // Initialize the state of the Register component with empty strings for email, password, and name
     this.state = {
       email: '',
       password: '',
@@ -28,20 +30,24 @@ class Register extends React.Component {
 
   // Method to handle form submission
   onSubmitSignIn = () => {
+    // Send a POST request to the endpoint of the API
     fetch('https://aqueous-earth-88471-1d6fe5b30998.herokuapp.com/register', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
+      method: 'post', // Specify the HTTP method as POST
+      headers: {'Content-Type': 'application/json'}, // Set the content type of the request to JSON
+
+      body: JSON.stringify({ // Convert the request body to a JSON string
+        // Include the current email, password, and name state in the request body
         email: this.state.email,
         password: this.state.password,
         name: this.state.name
       })
     })
-      .then(response => response.json())
+      .then(response => response.json()) // Convert the response to JSON
       .then(user => {
+        // If the user object has an id property, load the user and change the route to 'home'
         if (user.id) {
-          this.props.loadUser(user)
-          this.props.onRouteChange('home');
+          this.props.loadUser(user) // Load the user data
+          this.props.onRouteChange('home'); // Change the route to 'home'
         }
       })
   }
